@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sweetitech.entities.Country;
 import com.sweetitech.entities.TeamMember;
+import com.sweetitech.repositories.CountryRepository;
 import com.sweetitech.repositories.TeamMemberRepository;
 
 @Service
@@ -13,7 +15,12 @@ public class TeamMemberService {
 	@Autowired
 	private TeamMemberRepository teamMemberRepository;
 
-	public void save(TeamMember mTeamMember) {
+	@Autowired
+	private CountryRepository countryRepository;
+
+	public void save(TeamMember mTeamMember, long countryId) {
+		Country country = countryRepository.findCountryById(countryId);
+		mTeamMember.setCountry(country);
 		teamMemberRepository.save(mTeamMember);
 	}
 

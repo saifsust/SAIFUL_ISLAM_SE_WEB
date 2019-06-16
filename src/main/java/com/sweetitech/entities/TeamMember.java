@@ -29,19 +29,19 @@ public class TeamMember {
 	private String role;
 	@JoinColumn(name = "country_id")
 	@OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true, targetEntity = Country.class)
-	private Country coumtry;
+	private Country country;
 
 	public TeamMember() {
 		super();
 	}
 
-	public TeamMember(String name, Date dob, double age, String role, Country coumtry) {
+	public TeamMember(String name, Date dob, double age, String role, Country country) {
 		super();
 		this.name = name;
 		this.dob = dob;
 		this.age = age;
 		this.role = role;
-		this.coumtry = coumtry;
+		this.country = country;
 	}
 
 	public long getTeamMemberId() {
@@ -84,18 +84,18 @@ public class TeamMember {
 		this.role = role;
 	}
 
-	public Country getCoumtry() {
-		return coumtry;
+	public Country getCountry() {
+		return country;
 	}
 
-	public void setCoumtry(Country coumtry) {
-		this.coumtry = coumtry;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 	@Override
 	public String toString() {
 		return "TeamMember [teamMemberId=" + teamMemberId + ", name=" + name + ", dob=" + dob + ", age=" + age
-				+ ", role=" + role + ", coumtry=" + coumtry + "]";
+				+ ", role=" + role + ", country=" + country + "]";
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,8 +25,9 @@ public class TeamMemberController {
 	private TeamMemberService teamMemberService;
 
 	@PostMapping(path = "/upload")
-	public void upload(@ModelAttribute("member") TeamMember mTeamMember) {
-		teamMemberService.save(mTeamMember);
+	public String upload(@ModelAttribute("member") TeamMember mTeamMember, long countryId) {
+		teamMemberService.save(mTeamMember, countryId);
+		return "redirect:/";
 	}
 
 	@GetMapping(path = "/members/{countryId}")
