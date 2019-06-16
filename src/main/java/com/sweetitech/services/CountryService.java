@@ -21,4 +21,13 @@ public class CountryService {
 	public List<Country> getAllCountries() {
 		return countryRepository.findAll();
 	}
+
+	public int delete(long countryId) {
+		return countryRepository.deleteCountryById(countryId);
+	}
+
+	public int update(String name, long countryId) {
+		return countryRepository.update(name, countryId);
+	}
+
 }
