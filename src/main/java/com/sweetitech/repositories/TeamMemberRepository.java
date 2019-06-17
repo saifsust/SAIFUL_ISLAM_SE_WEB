@@ -21,7 +21,7 @@ public interface TeamMemberRepository extends JpaRepository<TeamMember, Integer>
 	public TeamMember findTeamMemberByTeamMemberId(@Param("team_member_id") long teamMemberId);
 
 	@Transactional
-	@Query(value = "SELECT * FROM icc_team_members JOIN icc_countries ON icc_team_members.counrty_id=icc_countries.country_id and icc_team_members.country_id=:country_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM icc_team_members JOIN icc_countries ON icc_team_members.country_id=icc_countries.country_id and icc_team_members.country_id=:country_id", nativeQuery = true)
 	public List<TeamMember> findTeamMemberByCountryId(@Param("country_id") long countryId);
 
 	@Transactional

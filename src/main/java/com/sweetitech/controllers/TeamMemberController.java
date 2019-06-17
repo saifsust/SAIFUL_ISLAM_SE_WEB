@@ -2,6 +2,11 @@ package com.sweetitech.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,24 +21,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sweetitech.entities.TeamMember;
 import com.sweetitech.services.TeamMemberService;
 
-@Controller
+@Controller("teamMemberController")
 @RequestMapping(path = "/team")
 public class TeamMemberController {
+
+	private static final Logger LOG = (Logger) LoggerFactory.getLogger(TeamMemberController.class);
 
 	@Autowired
 	private TeamMemberService teamMemberService;
 
 	@PostMapping(path = "/upload")
-	public String upload(@ModelAttribute("member") TeamMember mTeamMember, long countryId) {
+	public String upload(@ModelAttribute("member") TeamMember mTeamMember, @RequestParam("countryId") long countryId) {
+		LOG.info("Team Member " + mTeamMember.toString());
+		LOG.info("Country Id " + countryId);
+
 		teamMemberService.save(mTeamMember, countryId);
 		return "redirect:/";
 	}
 
-	@GetMapping(path = "/members/{countryId}")
+	@PostMapping(path = "/members/country/{name}")
 	@ResponseBody
 	@CrossOrigin
-	public List<TeamMember> team_members(@PathVariable("countryId") long countryId) {
-		return teamMemberService.teamMemberDetail(countryId);
+	public List<TeamMember> team_members(@PathVariable("name") String name) {
+		return teamMemberService.teamMemberDetail(name);
 	}
 
 	@GetMapping(path = "/previous/{team_member_id}")

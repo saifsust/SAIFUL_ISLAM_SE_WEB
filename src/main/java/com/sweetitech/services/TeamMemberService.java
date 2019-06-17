@@ -37,8 +37,9 @@ public class TeamMemberService {
 				teamMember.getRole(), teamMemberId);
 	}
 
-	public List<TeamMember> teamMemberDetail(long countryId) {
-		return teamMemberRepository.findTeamMemberByCountryId(countryId);
+	public List<TeamMember> teamMemberDetail(String name) {
+		Country country = countryRepository.findCountryByName(name);
+		return teamMemberRepository.findTeamMemberByCountryId(country.countryId);
 	}
 
 }
