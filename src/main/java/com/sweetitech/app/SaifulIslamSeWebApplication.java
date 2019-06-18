@@ -14,19 +14,20 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableConfigurationProperties
-//@EnableWebSecurity
-
+@EnableWebSecurity
 @SpringBootApplication
 @Configuration
 @EnableAutoConfiguration
@@ -34,6 +35,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EntityScan(basePackages = { "com.sweetitech.entities" })
 @EnableJpaRepositories(basePackages = { "com.sweetitech.repositories" })
 @EnableWebMvc
+@Import({ SpringWebSecurityConfig.class })
 public class SaifulIslamSeWebApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
 
 	@Override

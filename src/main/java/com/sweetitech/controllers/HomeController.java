@@ -30,12 +30,7 @@ public class HomeController {
 	@Autowired
 	private CountryService countryService;
 
-	@RequestMapping(path = "/login", method = RequestMethod.GET)
-	public String login(HttpServletRequest request, HttpServletResponse response) {
 
-		return "login";
-
-	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
