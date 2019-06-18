@@ -30,6 +30,13 @@ public class HomeController {
 	@Autowired
 	private CountryService countryService;
 
+	@RequestMapping(path = "/login", method = RequestMethod.GET)
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+
+		return "login";
+
+	}
+
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		mnv = new ModelAndView(INDEX);
@@ -56,9 +63,9 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(path = "/update", method = RequestMethod.GET)
-	public String country_update(@RequestParam("name") String name, @RequestParam("country_id") long countryId) {
-		countryService.update(name, countryId);
+	@RequestMapping(path = "/update", method = RequestMethod.POST)
+	public String country_update(@ModelAttribute("country") Country mCountry) {
+		countryService.update(mCountry.getName(), mCountry.getCountryId());
 		return "redirect:/";
 	}
 

@@ -2,9 +2,6 @@ package com.sweetitech.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,19 @@ public class TeamMemberController {
 		return "redirect:/";
 	}
 
+	@PostMapping(path = "/upload/{memberId}")
+	public String update(@ModelAttribute("member") TeamMember teamMember, @PathVariable("memberId") long teamMemberId,
+			@RequestParam("countryId") long countryId) {
+		LOG.info("Team Member " + teamMember.toString());
+		LOG.info("Country Id " + countryId);
+
+		System.out.println(teamMemberId + "  " + teamMember + "  " + countryId);
+
+		teamMemberService.update(teamMember, teamMemberId, countryId);
+
+		return "redirect:/";
+	}
+
 	@PostMapping(path = "/members/country/{name}")
 	@ResponseBody
 	@CrossOrigin
@@ -53,17 +63,10 @@ public class TeamMemberController {
 		return teamMemberService.previous(teamMemberId);
 	}
 
-	@PostMapping(path = "/update")
-	public String update(@RequestParam("team_member_id") long teamMemberId,
-			@ModelAttribute("team_member") TeamMember teamMember) {
-		teamMemberService.update(teamMember, teamMemberId);
-		return "index";
-	}
-
 	@GetMapping(path = "/delete/{team_member_id}")
 	public String delete(@PathVariable("team_member_id") long teamMemberId) {
 		teamMemberService.delete(teamMemberId);
-		return "index";
+		return "redirect:/";
 	}
 
 }

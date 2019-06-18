@@ -26,9 +26,10 @@ public interface TeamMemberRepository extends JpaRepository<TeamMember, Integer>
 
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE icc_team_members SET name=:name,age=:age,dob=:dob,role=:role WHERE team_member_id=:team_member_id", nativeQuery = true)
+	@Query(value = "UPDATE icc_team_members SET name=:name,age=:age,dob=:dob,role=:role,country_id=:country_id WHERE team_member_id=:team_member_id", nativeQuery = true)
 	public int updateById(@Param("name") String name, @Param("age") double age, @Param("dob") Date dob,
-			@Param("role") String role, @Param("team_member_id") long teamMemberId);
+			@Param("role") String role, @Param("country_id") long countryId,
+			@Param("team_member_id") long teamMemberId);
 
 	@Transactional
 	@Modifying

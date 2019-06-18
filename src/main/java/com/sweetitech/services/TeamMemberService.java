@@ -32,9 +32,9 @@ public class TeamMemberService {
 		return teamMemberRepository.findTeamMemberByTeamMemberId(teamMemberId);
 	}
 
-	public int update(TeamMember teamMember, long teamMemberId) {
+	public int update(TeamMember teamMember, long teamMemberId, long countryId) {
 		return teamMemberRepository.updateById(teamMember.getName(), teamMember.getAge(), teamMember.getDob(),
-				teamMember.getRole(), teamMemberId);
+				teamMember.getRole(), countryId, teamMemberId);
 	}
 
 	public List<TeamMember> teamMemberDetail(String name) {
